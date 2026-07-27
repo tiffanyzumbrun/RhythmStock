@@ -1,0 +1,72 @@
+Table products {
+  product_id varchar [pk]
+  product_name varchar [not null]
+  brand varchar
+  department_id varchar [not null]
+  category_id varchar [not null]
+
+  Note: 'Stores musical instrument and accessory product information.'
+}
+
+Table stores {
+  store_id varchar [pk]
+  store_name varchar
+  city varchar
+  state varchar
+
+  Note: 'Stores retail store or warehouse location information.'
+}
+
+Table calendar {
+  day_id varchar [pk]
+  calendar_date date [not null, unique]
+  year_week integer [not null]
+  weekday varchar [not null]
+  weekday_number integer [not null]
+  month_number integer [not null]
+  year_number integer [not null]
+  event_name_1 varchar
+  event_type_1 varchar
+  event_name_2 varchar
+  event_type_2 varchar
+  snap_ca boolean [not null]
+  snap_tx boolean [not null]
+  snap_wi boolean [not null]
+
+  Note: 'Date dimension containing calendar, event, and SNAP information.'
+}
+
+Table prices {
+  product_id varchar [not null]
+  store_id varchar [not null]
+  year_week integer [not null]
+  sell_price decimal(10,2) [not null]
+
+  indexes {
+    (product_id, store_id, year_week) [pk]
+  }
+
+  Note: 'Weekly selling price for each product at each store.'
+}
+
+Table sales {
+  product_id varchar [not null]
+  store_id varchar [not null]
+  day_id varchar [not null]
+  quantity_sold integer [not null]
+  sales_amount decimal(10,2)
+
+
+  indexes {
+    (product_id, store_id, day_id) [pk]
+  }
+
+  Note: 'Daily product sales by store.'
+}
+
+Ref: prices.product_id > products.product_id
+Ref: prices.store_id > stores.store_id
+
+Ref: sales.product_id > products.product_id
+Ref: sales.store_id > stores.store_id
+Ref: sales.day_id > calendar.day_id

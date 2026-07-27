@@ -216,3 +216,15 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Raw and processed datasets
+data/raw/*.csv
+data/processed/*
+
+# Keep folders in Git
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# macOS
+.DS_Store
+
