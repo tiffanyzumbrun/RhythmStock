@@ -19,7 +19,7 @@ CREATE TABLE stg_calendar (
     event_type_2 VARCHAR(50),
     snap_ca INT,
     snap_tx INT,
-    snap_wi INT,
+    snap_wi INT
 );
 
 -- =====================================================
@@ -34,4 +34,17 @@ CREATE TABLE stg_sell_prices (
     item_id VARCHAR(30),
     wm_yr_wk INT,
     sell_price DECIMAL(10, 2)
+);
+
+DROP TABLE IF EXISTS stg_sales;
+
+CREATE TABLE IF NOT EXISTS stg_sales (
+    id VARCHAR(100),
+    item_id VARCHAR(50),
+    dept_id VARCHAR(50),
+    cat_id VARCHAR(50),
+    store_id VARCHAR(50),
+    state_id VARCHAR(50),
+    day_id VARCHAR(20),
+    units_sold INT
 );
